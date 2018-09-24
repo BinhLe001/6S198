@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+
+<head>
+    <h2>6.S198 Assignment 3</h2>
+    <p>Name: Binh Le</p>
+    <p>E-mail: binhle@mit.edu</p>
+    <p>Other Assignments:</p>
+    <ul>
+        <li><a href='assignment0.html'>Assignment 0</a></li>
+        <li><a href='assignment0.html'>Assignment 1</a></li>
+        <li><a href='assignment2.html'>Assignment 2</a></li>
+    </ul>
+</head>
+
+<body>
+    <h3>Section 1.3: Experimenting with Hyperparameters</h3>
+    <p>Training result without any changes:</p>
+    <img src="pics/assignment3-0.png" alt="No Changes" width="300" height="400">
+
+    <p>Training result with learning rate changed from 0.1 to 0.5, seemed like it was unable to converge so accuracy
+        did not improve:</p>
+    <img src="pics/assignment3-1.png" alt="Large learning rate" width="300" height="400">
+
+    <p>Training result with output values changed from 16 to 10, did not have a big impact on accuracy changes:</p>
+    <img src="pics/assignment3-2.png" alt="Less output values" width="300" height="400">
+
+    <p>Training result with zero pad changed from 2 to 6, seemed like it improved accuracy:</p>
+    <img src="pics/assignment3-3.png" alt="Greater zero" width="300" height="400">
+
+    <h3>Section 1.4: Visualizing Convolutional Neural Nets</h3>
+    <p>
+        Draw an input, modify it, and observe how the results at each layer change as you change the drawing. Create
+        some inputs that look vaguely like digits, but that confuse the network, i.e., where two or more of the labels
+        register:
+    </p>
+
+    <p>A seven drawn with a hanging hook on the top also shows results with other numbers:</p>
+    <img src="pics/assignment3-4.png" alt="Seven" width="700" height="500">
+
+    <p>The model is unable to interpret a four being drawn in this way:</p>
+    <img src="pics/assignment3-5.png" alt="Four" width="700" height="500">
+
+    <p>A smoothly drawn five is mislabeled, possibly because fives in the training set were drawn with more aggressive
+        edges:</p>
+    <img src="pics/assignment3-6.png" alt="Five" width="700" height="500">
+
+    <h3>Section 2: Style Transfer From Assignment 2</h3>
+    <p>1. MIT</p>
+    <img src="pics/mit.jpg" alt="mit" width="500" height="400">
+    <img src="pics/mitstyle.jpg" alt="mit styled" width="500" height="400">
+
+    <p>2. New York City</p>
+    <img src="pics/nyc.jpg" alt="nyc" width="500" height="400">
+    <img src="pics/nycstyle.jpg" alt="nyc styled" width="500" height="400">
+
+    <p>3. Emirates Stadium</p>
+    <img src="pics/emirates.jpg" alt="emirates" width="500" height="400">
+    <img src="pics/emiratesstyle.jpg" alt="emirates styled" width="500" height="400">
+
+    <h3>Section 3.5: Fast Style Transfer</h3>
+    <p>1. What happens when you pass an image through the same filter several times? Do you observe any interesting
+        characteristics or padding artifacts?: When I passed the original image of Stata through the filter three
+        times, some of the coloring style shifted more towards the provided style image. The content stayed about the
+        same but you can observe that the brown building to the left of the image has an increasingly blue shading.
+    </p>
+    <img src="pics/assignment3-7.png" alt="Stata 1" width="700" height="500">
+    <img src="pics/assignment3-8.png" alt="Stata 2" width="700" height="500">
+    <img src="pics/assignment3-9.png" alt="Stata 3" width="700" height="500">
+
+
+    <p>2. Apply a filter to an image and then apply another filter to that already-filtered image. Is the result
+        similar to what you would get when you apply the second filter to the original image?: The result of applying
+        two different filters is different than just applying the second filter to the original image. The result of
+        filtering an already filtered image is a styling that is the combination of both filter styles as seen by the
+        marks on the forehead of the woman. These marks were created after filtering the first style and also shows up
+        in the second filtering. But when we
+        only filter the original image, we observe only the application of that second filter.
+    </p>
+    <img src="pics/assignment3-10.png" alt="Face 1" width="700" height="500">
+    <img src="pics/assignment3-11.png" alt="Face 2" width="700" height="500">
+    <img src="pics/assignment3-12.png" alt="Face 3" width="700" height="500">
+
+    <p>3. Try different combinations of filters and number of times you filter an image. Note on your website if you
+        have any interesting observations or insights: I tried filtering the original Stata image through 5 consecutive
+        filters. I found that by passing an image through multiple composite filters with different styles, the content
+        of the image begins to change to become a composite of the content of all of the style images. When using a
+        single style image like in part 1 of this section, the styling seems to shift more towards the style image
+        while the content stays about the same after consecutive filterings. In the last Stata image in this part, you
+        can see that details from the original image is now gone such as the windows on the face of the building.
+    </p>
+    <img src="pics/assignment3-13.png" alt="Stata 4" width="700" height="500">
+    <img src="pics/assignment3-14.png" alt="Stata 5" width="700" height="500">
+    <img src="pics/assignment3-15.png" alt="Stata 6" width="700" height="500">
+    <img src="pics/assignment3-16.png" alt="Stata 7" width="700" height="500">
+    <img src="pics/assignment3-17.png" alt="Stata 8" width="700" height="500">
+
+    <h3>Section 3.6: Building CNNs with code</h3>
+    <p>For this section, I used this CNN architecture to train the model as shown by this code:</p>
+    <img src="pics/assignment3-18.png" alt="Conv Layers" width="400" height="400">
+    <img src="pics/assignment3-19.png" alt="Compile Layers" width="400" height="400">
+
+    <p>1. Try changing the learning rate, batch size, and number of batches. Make sure that these numbers are
+        reasonable to start (i.e. won't take too long to run on your computer).
+    </p>
+    <ul>
+        <h4>MNIST</h4>
+        <li>With the initial learning rate of 0.15:</li>
+        <img src="pics/assignment3-20.png" alt="Medium Learning Rate" width="700" height="500">
+        <li>With a learning rate of 0.05:</li>
+        <img src="pics/assignment3-21.png" alt="Low Learning Rate" width="700" height="500">
+        <li>With a learning rate of 0.25:</li>
+        <img src="pics/assignment3-22.png" alt="High Learning Rate" width="700" height="500">
+
+        <li>With the initial batch size of 100:</li>
+        <img src="pics/assignment3-20.png" alt="Medium Batch Size" width="700" height="500">
+        <li>With a batch of 50:</li>
+        <img src="pics/assignment3-23.png" alt="Low Batch Size" width="700" height="500">
+        <li>With a batch size of 150:</li>
+        <img src="pics/assignment3-24.png" alt="High Batch Size" width="700" height="500">
+
+        <li>With the initial number of batch of 100:</li>
+        <img src="pics/assignment3-20.png" alt="Medium Num Batch" width="700" height="500">
+        <li>With a number of batch of 50:</li>
+        <img src="pics/assignment3-25.png" alt="Low Num Batch" width="700" height="500">
+        <li>With a number of batch of 150:</li>
+        <img src="pics/assignment3-26.png" alt="High Num Batch" width="700" height="500">
+
+        <h4>Fashion MNIST</h4>
+        <li>With the initial learning rate of 0.15:</li>
+        <img src="pics/assignment3-30.png" alt="Medium Learning Rate" width="700" height="500">
+        <li>With a learning rate of 0.05:</li>
+        <img src="pics/assignment3-31.png" alt="Low Learning Rate" width="700" height="500">
+        <li>With a learning rate of 0.25:</li>
+        <img src="pics/assignment3-32.png" alt="High Learning Rate" width="700" height="500">
+
+        <li>With the initial batch size of 100:</li>
+        <img src="pics/assignment3-30.png" alt="Medium Batch Size" width="700" height="500">
+        <li>With a batch of 50:</li>
+        <img src="pics/assignment3-33.png" alt="Low Batch Size" width="700" height="500">
+        <li>With a batch size of 150:</li>
+        <img src="pics/assignment3-34.png" alt="High Batch Size" width="700" height="500">
+
+        <li>With the initial number of batch of 100:</li>
+        <img src="pics/assignment3-30.png" alt="Medium Num Batch" width="700" height="500">
+        <li>With a number of batch of 50:</li>
+        <img src="pics/assignment3-35.png" alt="Low Num Batch" width="700" height="500">
+        <li>With a number of batch of 150:</li>
+        <img src="pics/assignment3-36.png" alt="High Num Batch" width="700" height="500">
+    </ul>
+
+    <p>2. Try changing some of the other parameters like field size, stride, output, etc.
+    </p>
+    <ul>
+        <h4>MNIST</h4>
+        <li>With the initial filters of 8:</li>
+        <img src="pics/assignment3-20.png" alt="Medium Filter" width="700" height="500">
+        <li>With a filters of 4:</li>
+        <img src="pics/assignment3-27.png" alt="Low Filter" width="700" height="500">
+        <li>With a filters of 12:</li>
+        <img src="pics/assignment3-28.png" alt="High Filter" width="700" height="500">
+
+        <li>With the initial stride of 1:</li>
+        <img src="pics/assignment3-20.png" alt="Low Stride" width="700" height="500">
+        <li>With a stride of 2:</li>
+        <img src="pics/assignment3-29.png" alt="Medium Stride" width="700" height="500">
+
+        <h4>Fashion MNIST</h4>
+        <li>With the initial filters of 8:</li>
+        <img src="pics/assignment3-30.png" alt="Medium Filter" width="700" height="500">
+        <li>With a filters of 4:</li>
+        <img src="pics/assignment3-37.png" alt="Low Filter" width="700" height="500">
+        <li>With a filters of 12:</li>
+        <img src="pics/assignment3-38.png" alt="High Filter" width="700" height="500">
+
+        <li>With the initial stride of 1:</li>
+        <img src="pics/assignment3-30.png" alt="Low Stride" width="700" height="500">
+        <li>With a stride of 2:</li>
+        <img src="pics/assignment3-39.png" alt="Medium Stride" width="700" height="500">
+    </ul>
+
+    <p>3. Do you have a hypothesis for why CIFAR-10 is so much harder to train on than Fashion MNIST and MNIST (i.e.
+        it’s more difficult to achieve a 90%+ accuracy) while Fashion MNIST has similar training times to MNIST (even
+        though Fashion MNIST is more complex than MNIST)?: A difference between the CIFAR-10 dataset is that it also
+        has color which adds another dimension that our CNN model is forced to interpret. This alone adds a lot more
+        complexity compared to Fashion MNIST even though the content of the datasets are both more complex than MNIST.
+    </p>
+
+    <p>4. How does adding more convolutional layers relate to accuracy and training speed? Is there a point at which
+        adding more layers plateaus or even decreases the maximum accuracy you are able to achieve with that model?:
+        Adding more layers increases training accuracy but at a certain point it causes overfitting of the training
+        data and limits test accuracy which is what we are trying to maximize. The move convolutional layers that are
+        added also slows training speed and increases training time.
+    </p>
+
+    <p>5. Challenge: Are you able to find an architecture/combination of techniques that can get you to 60% accuracy on
+        CIFAR-10 within 1 minute of training? 5 minutes? 10 minutes?: No, I was unable to find build a model that could
+        get 60% accuracy on the CIFAR-10 dataset.
+    </p>
+
+    <p>6. Add code that captures some performance statistic from a testing run. For example, you might keep track of
+        the fraction of examples where the prediction was correct, or perhaps do something more detailed that takes
+        the predicted probabilities into account: I implemented a performance statistic that would keep track of the
+        fraction of examples that the model predicted correctly. It would display in the UI as the number of correct
+        predictions divided by the total number of predictions. This statistic was sometimes easier to interpret than
+        the test accuracy listed as a percent. It reiterated that models with more training data often performed better
+        on accuracy because it predicted more of the 50 example tests correctly as seen by the performance statistic.
+    </p>
+    <img src="pics/assignment3-40.png" alt="Performance indication" width="700" height="500">
+    <img src="pics/assignment3-41.png" alt="Performance calc" width="700" height="500">
+    <img src="pics/assignment3-42.png" alt="Performance display" width="700" height="300">
+
+    <p>7. Add links to your code files on your website (please make sure these are text files and not screenshots so
+        that the graders can run your code if necessary).
+    </p>
+    <p>
+        <a href="assignment3-index.txt">Assignment 3 CNN code</a>
+    </p>
+    <p>
+        <a href="assignment3-ui.txt">Assignment 3 UI code</a>
+    </p>
+</body>
+
+</html>
