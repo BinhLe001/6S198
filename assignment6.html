@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+
+<head>
+    <h2>6.S198 Assignment 6</h2>
+    <p>Name: Binh Le</p>
+    <p>E-mail: binhle@mit.edu</p>
+    <p>Other Assignments:</p>
+    <ul>
+        <li><a href='assignment0.html'>Assignment 0</a></li>
+        <li><a href='assignment1.html'>Assignment 1</a></li>
+        <li><a href='assignment2.html'>Assignment 2</a></li>
+        <li><a href='assignment3.html'>Assignment 3</a></li>
+        <li><a href='assignment4.html'>Assignment 4</a></li>
+        <li><a href='assignment5.html'>Assignment 5</a></li>
+    </ul>
+</head>
+
+<body>
+    <h3>Problem 1:</h3>
+    <p>What is the reward scheme for FrozenLake?</p>
+    <ul>
+        <li>
+            You receive a reward of 1 if you the goal and 0 otherwise.
+        </li>
+        <li>
+            The episode ends when you either reach the goal or fall into a hole.
+        </li>
+    </ul>
+
+    <h3>Problem 2:</h3>
+    <p>How big is the table used for Q-learning above?</p>
+    <ul>
+        <li>
+            The table used for Q-learning has a size of 64.
+        </li>
+        <li>
+            64 = 16 * 4 = # of values in the action space * # of values in the observation space.
+        </li>
+    </ul>
+
+    <h3>Problem 3:</h3>
+    <p>Did the rewards improve over time? Why or why not?</p>
+    <ul>
+        <li>
+            Yes, the rewards did improve over time because of the learning algorithm used in each episode.
+        </li>
+        <li>
+            The rewards are closer to 0 in the beginning, but after iterating over more episodes, the reward grows
+            closer to 1.
+        </li>
+    </ul>
+
+    <h3>Problem 4:</h3>
+    <p>Try different values for the learning rate. What do you observe?</p>
+    <ul>
+        <li>
+            The algorithm perfomed poorly when the learning rate was either too close to 0 like 0.05 or close to 1 like
+            0.95.
+        </li>
+        <li>
+            After trying out multiple learning rates between 0 and 1, 0.65 seemed like it was the learning rate that
+            performed the best.
+        </li>
+    </ul>
+
+</body>
+
+</html>
