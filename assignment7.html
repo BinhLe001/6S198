@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+
+<head>
+    <h2>6.S198 Assignment 7</h2>
+    <p>Name: Binh Le</p>
+    <p>E-mail: binhle@mit.edu</p>
+    <p>Other Assignments:</p>
+    <ul>
+        <li><a href='assignment0.html'>Assignment 0</a></li>
+        <li><a href='assignment1.html'>Assignment 1</a></li>
+        <li><a href='assignment2.html'>Assignment 2</a></li>
+        <li><a href='assignment3.html'>Assignment 3</a></li>
+        <li><a href='assignment4.html'>Assignment 4</a></li>
+        <li><a href='assignment5.html'>Assignment 5</a></li>
+        <li><a href='assignment6.html'>Assignment 6</a></li>
+    </ul>
+</head>
+
+<body>
+    <h3>Problem 1: Understanding LSTMs</h3>
+    <p>1. LSTMs consist of chained, repeating modules. At a high level, what are the two pieces of information that is
+        passed between modules?</p>
+    <ul>
+        <li>
+            The past cell state and the past output are the two pieces that are passed between modules.
+        </li>
+    </ul>
+    <p>2. "LSTM" stands for "Long Short Term Memory". The name is a reference to a problem with RNNs that LSTMs are
+        designed to solve. What is this problem? At a high level, how do LSTMs attempt to address this problem (what
+        extra information do they add)?
+    </p>
+    <ul>
+        <li>
+            LSTMs attempt to address the problem of long-term dependencies, RNNs cannot learn to connect information
+            when the gap between relevant information and the point where it is needed is very large.
+        </li>
+        <li>
+            LSTMs add information about the forget, input, and output gates to further control the cell state and what
+            it saw previously.
+        </li>
+    </ul>
+    <p>3. The blog post describes two views of RNN/LSTM architectures. In one of these views, we think of the RNN as
+        being "unrolled" into a chain of repeating modules. What values (represented with tensors) are shared between
+        these modules, and what values are different?
+    </p>
+    <ul>
+        <li>
+            The values that are shared are the network parameters and the model values.
+        </li>
+        <li>
+            The values that are different are the cell state, inputs, and outputs which are passed from each module to
+            the next.
+        </li>
+    </ul>
+    <p>4. Remember that the purpose of the "forget gate layer" is to allow the network to "forget" some of the current
+        state. Why do you think a sigmoid non-linearity is used here instead of a ReLU nonlinearity (as we were using
+        in most of our previous models)? Hint: look at this image visualizing sigmoid and ReLU https://goo.gl/URp7Hm.
+        Think about the ranges of the output - what is the property of sigmoid's output range that makes it work for
+        our purpose when we multiply with the current state vector?
+    </p>
+    <ul>
+        <li>
+            We use Sigmoid because its output goes from 0 to 1 instead of ReLu's 0 to infinity. Since we want to the
+            forget gate to have an output between forget and remember, we can use the output from 0 (forget) to 1
+            (remember).
+        </li>
+    </ul>
+
+    <h3>Problem 2.2: Run the Model</h3>
+    <p>1. Run the model for 10 to 15 epochs, or until you see interesting results. Pause the model and record the
+        perplexity. Perplexity is a measurement of how well the model predicts a sample. A low perplexity indicates
+        that the model is good at making predictions. </p>
+    <ul>
+        <li>
+            After 13 epochs, the perplexity is 6.20 at 1.00 temperature.
+        </li>
+        <img src="pics/assignment7-1.png" alt="Training 1" width="800" height="500">
+    </ul>
+    <p>2. Adjust the softmax sample temperature, and continue training for a few samples. Softmax sample temperature is
+        a hyperparameter that determines how softmax computes the log probabilities of the prediction outputs. If the
+        temperature is high, the probabilities will go toward zero and you will see less frequent words. If the
+        temperature is low, then you will see more common words, but there may be more repetition. Try to find a
+        temperature that produces the most natural seeming text, and give some examples of your generated sentence
+        results.</p>
+    <ul>
+        <li>
+            After 12 epochs, the perplexity is 11.64 at 0.25 temperature
+        </li>
+        <img src="pics/assignment7-4.png" alt="Training 4" width="800" height="500">
+        <li>
+            After 13 epochs, the perplexity is 5.57 at 0.50 temperature
+        </li>
+        <img src="pics/assignment7-5.png" alt="Training 5" width="800" height="500">
+        <li>
+            After 11 epochs, the perplexity is 3.95 at 2.00 temperature
+        </li>
+        <img src="pics/assignment7-2.png" alt="Training 2" width="800" height="500">
+        <li>
+            After 18 epochs, the perplexity is 4.43 at 5.01 temperature
+        </li>
+        <img src="pics/assignment7-3.png" alt="Training 3" width="800" height="500">
+    </ul>
+    <p>3. Write down any observations about your generated sentence results. Does your text reflect properties of the
+        input sources you used (i.e. vocabulary, sentence length)?</p>
+    <ul>
+        <li>
+            The text generated does reflect properties of the input sources I used with a mix from both sources.
+        </li>
+        <li>
+            The sentence length is pretty close the average of the two sources with longer Adele sentences and shorter
+            Dr. Seuss sentences. The vocabulary generated is also fairly simple because of the Dr. Seuss vocabularly
+            that was meant to be read by children.
+        </li>
+    </ul>
+    <p>4. Try changing the model parameters and initialization. Record your observations from at least one of these
+        experiments. The experiment chosen was to adjust the embedding size of the inputs.</p>
+    <ul>
+        <li>The perplexity seemed to decrease quicker when the embedding size was high but it decreased slower when the
+            embedding size was lower.</li>
+        <li>
+            Embedding size = 1 after 10 epochs with perplexity of 8.22 and 1.00 temperature
+        </li>
+        <img src="pics/assignment7-6.png" alt="Training 6" width="800" height="500">
+        <li>
+            Embedding size = 3 after 10 epochs with perplexity of 4.18 and 1.00 temperature
+        </li>
+        <img src="pics/assignment7-7.png" alt="Training 7" width="800" height="500">
+        <li>
+            Embedding size = 7 after 10 epochs with perplexity of 8.84 and 1.00 temperature
+        </li>
+        <img src="pics/assignment7-8.png" alt="Training 8" width="800" height="500">
+        <li>
+            Embedding size = 9 after 10 epochs with perplexity of 4.54 and 1.00 temperature
+        </li>
+        <img src="pics/assignment7-9.png" alt="Training 9" width="800" height="500">
+    </ul>
+
+    <h3>Problem 3: Music Generation with Tensorflow</h3>
+    <p>1. Follow the steps outlined in the notebook. You need to fill out the lines marked #TODO with the appropriate
+        code. Once you are finished, upload your solution code file to your website in a way that would allow us to
+        download and run it.</p>
+    <ul>
+        <li>
+            <a href="assignment7-notebook.ipynb">assignment7-notebook.ipynb</a>
+        </li>
+        <li>
+            <a href="assignment7-page.htm">assignment7-page.htm</a>
+        </li>
+    </ul>
+    <p>2. Upload the midi file for your generated music clip to your website!</p>
+    <ul>
+        <li>
+            File for seed 41: <a href="songs/gen_song_41.mid">gen_song_41.mid</a>
+        </li>
+        <li>
+            File for seed 15: <a href="songs/gen_song_15.mid">gen_song_15.mid</a>
+        </li>
+        <li>
+            File for seed 20: <a href="songs/gen_song_20.mid">gen_song_20.mid</a>
+        </li>
+        <li>
+            File for seed 34: <a href="songs/gen_song_34.mid">gen_song_34.mid</a>
+        </li>
+        <li>
+            File for seed 57: <a href="songs/gen_song_57.mid">gen_song_57.mid</a>
+        </li>
+    </ul>
+</body>
+
+</html>
